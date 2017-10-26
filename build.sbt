@@ -2,8 +2,8 @@ name := "spark-sas7bdat"
 version := "1.1.6"
 organization := "com.github.saurfang"
 
-scalaVersion := "2.11.6"
-crossScalaVersions := Seq("2.10.5", "2.11.6")
+scalaVersion := "2.12.3"
+crossScalaVersions := Seq("2.10.4", "2.11.6")
 
 scalacOptions ++= Seq("-target:jvm-1.7" )
 javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
