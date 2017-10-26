@@ -1,5 +1,5 @@
 name := "spark-sas7bdat"
-version := "1.1.5"
+version := "1.1.6"
 organization := "com.github.saurfang"
 
 scalaVersion := "2.11.6"
@@ -9,14 +9,14 @@ scalacOptions ++= Seq("-target:jvm-1.7" )
 javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 libraryDependencies ++= Seq(
-  "com.epam" % "parso" % "1.2.1",
-  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
-  "org.apache.logging.log4j" %% "log4j-api-scala" % "2.7"
+  "com.epam" % "parso" % "2.0.7",
+  "org.scalatest" %% "scalatest" % "3.0.4" % "test",
+  "org.apache.logging.log4j" %% "log4j-api-scala" % "2.10"
 )
 
 //sbt-spark-package
 spName := "saurfang/spark-sas7bdat"
-sparkVersion := "2.0.1"
+sparkVersion := "2.1.0"
 sparkComponents += "sql"
 spAppendScalaVersion := true
 credentials += Credentials(Path.userHome / ".ivy2" / ".sbtcredentials")
