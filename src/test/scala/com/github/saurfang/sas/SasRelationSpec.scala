@@ -1,6 +1,6 @@
 package com.github.saurfang.sas
 
-import com.ggasoftware.parso.SasFileConstants
+import com.epam.parso.SasFileConstants
 import org.apache.hadoop.mapred.JobConf
 import org.apache.spark.sql.{SQLContext, SaveMode}
 import org.apache.spark.{SharedSparkContext}
