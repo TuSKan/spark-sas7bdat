@@ -2,7 +2,9 @@ package com.github.saurfang.sas.mapred
 
 import java.io.IOException
 
-import com.epam.parso.{SasFileConstants, SasFileParser, SasFileProperties}
+import com.epam.parso.SasFileProperties
+import com.epam.parso.impl.SasFileReaderImpl
+import com.epam.parso.impl.SasFileConstants._
 import com.github.saurfang.sas.util.PrivateMethodExposer
 import org.apache.commons.io.input.CountingInputStream
 import org.apache.hadoop.conf.Configuration
@@ -24,7 +26,7 @@ class SasRecordReader() extends RecordReader[NullWritable, Array[Object]] {
   private var splitEnd: Long = 0L
   private var fileInputStream: FSDataInputStream = null
   private var countingInputStream: CountingInputStream = null
-  private var sasFileReader: SasFileParser = null
+  private var sasFileReader: SasFileReaderImpl = null
   private var sasFileReaderPrivateExposer: PrivateMethodExposer = null
   private var recordCount: Int = 0
   private var lastPageBlockCounter: Int = 0
@@ -81,7 +83,7 @@ class SasRecordReader() extends RecordReader[NullWritable, Array[Object]] {
     fileInputStream = fs.open(file)
     countingInputStream = new CountingInputStream(fileInputStream)
     // open SAS file reader to read meta data
-    sasFileReader = new SasFileParser.Builder().sasFileStream(countingInputStream).build() // new SasFileReader(countingInputStream)
+    sasFileReader = new SasFileReaderImpl(countingInputStream)
     sasFileReaderPrivateExposer = PrivateMethodExposer(sasFileReader)
 
     log.info(sasFileProperties.toString)
@@ -133,7 +135,7 @@ class SasRecordReader() extends RecordReader[NullWritable, Array[Object]] {
     // be especially careful about last page
       splitStart + getPos >= maxPagePosition &&
         // but don't get stuck on end of the file
-        !(sasFileReaderPrivateExposer.get[Int]('currentPageType) == SasFileConstants.PAGE_META_TYPE &&
+        !(sasFileReaderPrivateExposer.get[Int]('currentPageType) == PAGE_META_TYPE &&
           sasFileReaderPrivateExposer.get[java.util.List[_]]('currentPageDataSubheaderPointers).size == 0)
     ) {
       if (lastPageBlockCounter < lastPageBlockCount) {
