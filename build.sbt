@@ -19,7 +19,6 @@ spName := "saurfang/spark-sas7bdat"
 sparkVersion := "2.1.0"
 sparkComponents += "sql"
 spAppendScalaVersion := true
-credentials += Credentials(Path.userHome / ".ivy2" / "/.sbtcredentials")
 licenses += "GPL-3.0" -> url("http://opensource.org/licenses/GPL-3.0")
 
 //include provided dependencies in sbt run task
