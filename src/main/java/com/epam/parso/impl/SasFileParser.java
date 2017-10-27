@@ -990,7 +990,7 @@ public final class SasFileParser {
     /**
      * SasFileParser builder class made using builder pattern.
      */
-    static class Builder {
+    public static class Builder {
         /**
          * Builder variable for {@link SasFileParser#sasFileStream} variable.
          */

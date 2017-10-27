@@ -4,6 +4,7 @@ import java.io.IOException
 
 import com.epam.parso.SasFileProperties
 import com.epam.parso.impl.SasFileReaderImpl
+import com.epam.parso.impl.SasFileParser
 import com.epam.parso.impl.SasFileConstants._
 import com.github.saurfang.sas.util.PrivateMethodExposer
 import org.apache.commons.io.input.CountingInputStream
@@ -84,7 +85,7 @@ class SasRecordReader() extends RecordReader[NullWritable, Array[Object]] {
     countingInputStream = new CountingInputStream(fileInputStream)
     // open SAS file reader to read meta data
     sasFileReader = new SasFileReaderImpl(countingInputStream)
-    sasFileReaderPrivateExposer = PrivateMethodExposer(sasFileReader)
+    sasFileReaderPrivateExposer = PrivateMethodExposer(PrivateMethodExposer(sasFileReader).get[SasFileParser]('sasFileParser))
 
     log.info(sasFileProperties.toString)
 
